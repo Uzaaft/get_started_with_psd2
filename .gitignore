@@ -1,5 +1,8 @@
+# Project spesific ignores
 .vscode
 webdriver/
+*.DS_Store
+*.vscode
 
 #ignore certificates 
 certificate/certificate.pem

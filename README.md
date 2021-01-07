@@ -19,7 +19,8 @@ First, you should sign up at the [DNB Developer portal](https://developer.dnb.no
 
 There are two requirements to get this code up and running. One is is to authenticate yourself when asking for consent from the DNB API. In the Sandbox API it is required to go to the link provided when asking for consent. This is handled by the code provided in this repository by using [Selenium](https://www.selenium.dev) and the [Chromium Driver](https://chromedriver.chromium.org/downloads). 
 The [Selenium Documentation](https://www.selenium.dev/documentation/en/) is a great place to start if you have further enquiries about web automation.
-The second requirement is to create, and download a certificate from [here](https://developer.dnb.no/profile/psd2)
+The second requirement is to create, and download a certificate from [here](https://developer.dnb.no/profile/psd2). 
+## Setup:
 
 
 The following SSN's(Sosial Security Number) and ID for Corporate users are accesible in the Sandbox API:
