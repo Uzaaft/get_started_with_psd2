@@ -23,7 +23,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     download_url='https://github.com/Njord-Technologies/get_started_with_psd2/archive/master.zip',
-    keywords=["DNB PSD2", "open banking"],
+    keywords=["dnb psd2", "open banking"],
     classifiers=['Programming Language :: Python :: 3.7',
                  'Programming Language :: Python :: 3.8',
                  'Programming Language :: Python :: 3.9']

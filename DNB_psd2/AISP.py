@@ -14,7 +14,7 @@ from selenium.webdriver.chrome.options import Options
 class AISP:
     __slots__ = 'endpoint', 'date', 's', 'debug', 'consent_payload', 'consent', 'authentication_url'
 
-    def __init__(self, PSU_ID='31125453913'):
+    def __init__(self, pem_path: str, key_path: str, PSU_ID: str):
         """Initialize the server
 
         Args:
@@ -37,8 +37,7 @@ class AISP:
             'TPP-Redirect-URI': 'https://dnb.no'
         }
         self.s = requests.Session()
-        self.s.cert = ('./certificate/certificate.pem',
-                       './certificate/private.key')
+        self.s.cert = (pem_path, key_path)
         self.s.headers.update(headers)
         self.post_consents()
 
