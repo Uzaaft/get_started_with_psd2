@@ -20,8 +20,10 @@ First, you should sign up at the [DNB Developer portal](https://developer.dnb.no
 There are two requirements to get this code up and running. One is is to authenticate yourself when asking for consent from the DNB API. In the Sandbox API it is required to go to the link provided when asking for consent. This is handled by the code provided in this repository by using [Selenium](https://www.selenium.dev) and the [Chromium Driver](https://chromedriver.chromium.org/downloads). 
 The [Selenium Documentation](https://www.selenium.dev/documentation/en/) is a great place to start if you have further enquiries about web automation.
 The second requirement is to create, and download a certificate from [here](https://developer.dnb.no/profile/psd2). 
-## Setup:
-
+## Installation:
+1. Make sure that you have Python 3.7 or higher installed on your computer. 
+2. Make sure that you have pip installed. 
+3. Install the library by using the following command: `pip install git+https://github.com/Njord-Technologies/get_started_with_psd2
 
 The following SSN's(Sosial Security Number) and ID for Corporate users are accesible in the Sandbox API:
 | SSN/TB-ident | No. of accounts | No. of credit card accounts | Available context |
