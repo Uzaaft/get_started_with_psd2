@@ -2,7 +2,7 @@
 
 The purpose if this repository is to serve as a starting point from which one can explore, and test the DnB API. 
 
-##### Provided under MIT License by Daniel Paquin.
+##### Provided under MIT License by Njord Technologies.
 *Note: this library may be subtly broken or buggy. The code is released under
 the MIT License – please take the following message to heart:*
 > THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
