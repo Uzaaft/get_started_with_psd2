@@ -39,7 +39,9 @@ The AISP endpoints can be reached using ```AISP```
 
 ```python
 from DNB_psd2 import AISP
-AISP_client = AISP(PSU_ID = "Insert SSN or TB here", pem_path = "Path to the *.pem file",key_path =  "Path to the *.key file")
+AISP_client = AISP(PSU_ID = "Insert SSN or TB here", pem_path = "Path to the *.pem file",
+                    key_path =  "Path to the *.key file", 
+                    webdriver_path="Path to the chrome webdriver")
 ```
 The `AISP()` class collects the consent for the user. 
 
@@ -60,7 +62,7 @@ The following SSN's(Sosial Security Number) and ID for Corporate users are acces
 | TB76688      | 4               | -                           | Corporate         |
 
 ### AISP Methods
-- [accounts](https://developer.dnb.no/documentation/psd2/reference/Account-Information-Service-(AIS))
+- [accounts](https://developer.dnb.no/documentation/psd2/prod/reference/Account-Information-Service-(AIS))
 ```python
 # Get the accounts accosiated with the SSN/TB
 AISP.accounts()
