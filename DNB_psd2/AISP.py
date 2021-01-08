@@ -40,7 +40,7 @@ class AISP:
         self.s.cert = (pem_path, key_path)
         self.s.headers.update(headers)
         self.post_consents()
-        self.webdriver_path = webdriver_path
+        self.driver_path = webdriver_path
 
     def authenticate(self, url: str) -> None:
         """Authenticate to the server .
@@ -50,7 +50,7 @@ class AISP:
         chrome_options = Options()
         chrome_options.add_argument("--headless")
         driver = webdriver.Chrome(
-            self.webdriver_path, options=chrome_options)
+            self.driver_path, options=chrome_options)
         driver.get(self.authentication_url)
 
         try:
