@@ -23,7 +23,7 @@ The second requirement is to create, and download a certificate from [here](http
 ## Installation:
 1. Make sure that you have Python 3.7 or higher installed on your computer. 
 2. Make sure that you have pip installed. 
-3. Install the library by using the following command: `pip install git+https://github.com/Njord-Technologies/get_started_with_psd` 
+3. Install the library by using the following command: `pip install git+https://github.com/Njord-Technologies/get_started_with_psd2` 
 4. Test that the installation of the library was successful by running the command `python -m from DNB_psd2 import AISP `
 If there are no error messages you're good to go! (Knock on wood)  
 
