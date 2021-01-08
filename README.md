@@ -39,7 +39,7 @@ The AISP endpoints can be reached using ```AISP```
 
 ```python
 from DNB_psd2 import AISP
-AISP_client = AISP(PSU_ID = "Insert SSN or TB here", )
+AISP_client = AISP(PSU_ID = "Insert SSN or TB here", pem_path = "Path to the *.pem file",key_path =  "Path to the *.key file")
 ```
 The `AISP()` class collects the consent for the user. 
 
