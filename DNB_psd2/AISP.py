@@ -12,7 +12,6 @@ from selenium.webdriver.chrome.options import Options
 
 
 class AISP:
-    __slots__ = 'endpoint', 'date', 's', 'consent_payload', 'consent', 'authentication_url', 'webdriver_path'
 
     def __init__(self, pem_path: str, key_path: str, PSU_ID: str, webdriver_path: str):
         """Initialize an instance with a connection to the DNB Sandbox API .
