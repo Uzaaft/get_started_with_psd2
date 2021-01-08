@@ -11,12 +11,12 @@ FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+# Limitations:
+The code in this repository only contain code that works with the AISP section of the DNB API. Please see the TODO list at the bottom of the README if to see what features the team is working on implementing.
 
-# Getting Started
-
-First, you should sign up at the [DNB Developer portal](https://developer.dnb.no), and read the Documentation there. 
 ## Requirements:
 
+First, you should sign up at the [DNB Developer portal](https://developer.dnb.no), and read the Documentation there. 
 There are two requirements to get this code up and running. One is is to authenticate yourself when asking for consent from the DNB API. In the Sandbox API it is required to go to the link provided when asking for consent. This is handled by the code provided in this repository by using [Selenium](https://www.selenium.dev) and the [Chromium Driver](https://chromedriver.chromium.org/downloads). 
 The [Selenium Documentation](https://www.selenium.dev/documentation/en/) is a great place to start if you have further enquiries about web automation.
 The second requirement is to create, and download a certificate from [here](https://developer.dnb.no/profile/psd2). 
@@ -25,6 +25,22 @@ The second requirement is to create, and download a certificate from [here](http
 2. Make sure that you have pip installed. 
 3. Install the library by using the following command: `pip install git+https://github.com/Njord-Technologies/get_started_with_psd` 
 4. Test that the installation of the library was successful by running the command `python -m from DNB_psd2 import AISP `
+If there are no error messages you're good to go! (Knock on wood)  
+
+# Getting Started
+The DNB sandbox API can be divded in three parts. These are:
+* AISP - Account Information Service Provider. With this role you can list accounts, get balances and account details.
+* PISP - Payment Initiation Service Provider. With this role you can initiate payments.
+* PIISP - Payment Instrument Issuing Service Provider. With this role you can check if a card/account has sufficient funds for a transaction
+
+In it's current stage, this code only supports a limited set of the API. Work is being done at broadening the capability of the code.
+
+The AISP endpoints can be readed using ```AISP```
+
+```python
+from DNB_psd2 import AISP
+AISP_client = AISP(PSU_ID = "Insert SSN or TB here")
+```
 
 The following SSN's(Sosial Security Number) and ID for Corporate users are accesible in the Sandbox API:
 | SSN/TB-ident | No. of accounts | No. of credit card accounts | Available context |
