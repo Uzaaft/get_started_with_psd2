@@ -35,7 +35,7 @@ The DNB sandbox API can be divded in three parts. These are:
 
 In it's current stage, this code only supports a limited set of the API. Work is being done at broadening the capability of the code.
 
-The AISP endpoints can be readed using ```AISP```
+The AISP endpoints can be reached using ```AISP```
 
 ```python
 from DNB_psd2 import AISP
@@ -56,3 +56,9 @@ The following SSN's(Sosial Security Number) and ID for Corporate users are acces
 | 31125458052  | 2               | 2                           | Retail            |
 | 31125470982  | 2               | 2                           | Retail            |
 | TB76688      | 4               | -                           | Corporate         |
+
+### AISP Methods
+- [get_products](https://docs.pro.coinbase.com//#get-products)
+```python
+public_client.get_products()
+```
