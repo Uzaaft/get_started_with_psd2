@@ -12,7 +12,7 @@ with open("README.md", "r") as f:
     long_description = f.read()
 
 setup(
-    name="psd2",
+    name="dnb_psd2",
     version="0.0.1a",
     author="Njord Technologies",
     author_email="post@njordtechnologies.com",
