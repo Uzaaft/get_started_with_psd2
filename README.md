@@ -66,11 +66,6 @@ The following SSN's(Sosial Security Number) and ID for Corporate users are acces
 AISP.accounts()
 ```
 
-- [accounts](https://developer.dnb.no/documentation/psd2/reference/Account-Information-Service-(AIS))
-```python
-#Get information about a certain account.
-AISP.get_account_info(bban = "Insert Account nr(bban) here")
-```
 - [Get account details](https://developer.dnb.no/documentation/psd2/prod/reference/Account-Information-Service-(AIS)#operation/get/v1/readAccountDetailsUsingGET)
 ```python
 #Get information about a certain account.
