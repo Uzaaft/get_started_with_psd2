@@ -12,14 +12,15 @@ from selenium.webdriver.chrome.options import Options
 
 
 class AISP:
-    __slots__ = 'endpoint', 'date', 's', 'debug', 'consent_payload', 'consent', 'authentication_url'
+    __slots__ = 'endpoint', 'date', 's', 'consent_payload', 'consent', 'authentication_url'
 
     def __init__(self, pem_path: str, key_path: str, PSU_ID: str):
-        """Initialize the server
+        """Initialize an instance with a connection to the DNB Sandbox API .
 
         Args:
-
-            PSU_ID (str, optional): [description]. Defaults to '31125453913'.
+            pem_path (str): [Path to the *.pem file downloaded from developer.dnb.no]
+            key_path (str): [Path to the *.cert file downloaded from developer.dnb.no]
+            PSU_ID (str): [Sosial security number or TB-ID to access the data for an entity(human or corporation)]
         """
         self.endpoint = "https://sandboxapi.psd.dnb.no/v1"
         self.date = datetime.date(datetime.now())
