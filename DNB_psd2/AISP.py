@@ -121,28 +121,28 @@ class AISP:
         # Return a list with the different account numbers
         return [i.get('bban') for i in r.json().get('accounts')]
 
-    def get_account_info(self, account: int) -> None:
+    def get_account_info(self, bban: int) -> dict:
         """Get account information.
         Args:
-            account (int): [account/bban nr]
+            bban (int): [bban/bban nr]
         """
         r = self.s.request(
-            "GET", url=f"{self.endpoint}/accounts/{account}", data={})
+            "GET", url=f"{self.endpoint}/accounts/{bban}", data={})
         return r.json()
 
     def get_bank_transactions(
             self,
-            account: int) -> dict:
+            bban: int) -> dict:
         """Returns a list of of bban, pending and booked transactions .
         Args:
-            account (int): [The account we want to extract transactions from]
+            bban (int): [The account we want to extract transactions from]
             preprocessed (bool, optional): [Option to let the funciton preprocess the data for the user]. Defaults to False.
         Returns:
             dict: [Either one dict containing the trans info, or a preprocessed dict splitt up for easy of use.]
         """
         r = self.s.request(
             "GET",
-            url=f"{self.endpoint}/accounts/{account}/transactions?bookingStatus=both&dateFrom=2000-01-01",
+            url=f"{self.endpoint}/accounts/{bban}/transactions?bookingStatus=both&dateFrom=2000-01-01",
             data={})
         return r.json()
 
@@ -157,26 +157,18 @@ class AISP:
         # Return a list with the different account numbers
         return [i.get('resourceId') for i in r.json().get('cardAccounts')]
 
-    def get_card_transactions(self, account: int) -> None:
+    def get_card_transactions(self, bban: int) -> None:
         """Returns the current user's card transactions .
         Args:
             account (int): [description]
         """
         r = self.s.request(
             "GET",
-            url=f"{self.endpoint}/card-accounts/{account}/transactions?bookingStatus=both&dateFrom=2019-01-01",
+            url=f"{self.endpoint}/card-accounts/{bban}/transactions?bookingStatus=both&dateFrom=2019-01-01",
             data={})
         return r.text
 
-    def go_trough_card_transactions(self, cards):
-        """Go through the cards available for the current accounts/SSID user .
-        Args:
-            cards ([type]): [description]
-        """
-        for i in range(len(cards)):
-            self.get_card_transactions(cards[i])
-
-    def read_account_balance(self, bban):
+    def get_account_balance(self, bban):
         """Returns a json/dictionary of the account balance
         Args:
             bban (str): Account-number (bban)

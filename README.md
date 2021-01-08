@@ -39,8 +39,10 @@ The AISP endpoints can be reached using ```AISP```
 
 ```python
 from DNB_psd2 import AISP
-AISP_client = AISP(PSU_ID = "Insert SSN or TB here")
+AISP_client = AISP(PSU_ID = "Insert SSN or TB here", )
 ```
+The `AISP()` class collects the consent for the user. 
+
 
 The following SSN's(Sosial Security Number) and ID for Corporate users are accesible in the Sandbox API:
 | SSN/TB-ident | No. of accounts | No. of credit card accounts | Available context |
@@ -58,7 +60,44 @@ The following SSN's(Sosial Security Number) and ID for Corporate users are acces
 | TB76688      | 4               | -                           | Corporate         |
 
 ### AISP Methods
-- [get_products](https://docs.pro.coinbase.com//#get-products)
+- [accounts](https://developer.dnb.no/documentation/psd2/reference/Account-Information-Service-(AIS))
 ```python
-public_client.get_products()
+# Get the accounts accosiated with the SSN/TB
+AISP.accounts()
+```
+
+- [accounts](https://developer.dnb.no/documentation/psd2/reference/Account-Information-Service-(AIS))
+```python
+#Get information about a certain account.
+AISP.get_account_info(bban = "Insert Account nr(bban) here")
+```
+- [Get account details](https://developer.dnb.no/documentation/psd2/prod/reference/Account-Information-Service-(AIS)#operation/get/v1/readAccountDetailsUsingGET)
+```python
+#Get information about a certain account.
+AISP.get_account_info(bban = "Insert Account nr(bban) here")
+```
+
+- [Get account balances](https://developer.dnb.no/documentation/psd2/prod/reference/Account-Information-Service-(AIS)#operation/get/v1/getBalancesUsingGET)
+```python
+#Get balance for a certain account.
+AISP.get_account_balance(bban = "Insert Account nr(bban) here")
+```
+
+
+- [Get Bank Transactions](https://developer.dnb.no/documentation/psd2/prod/reference/Account-Information-Service-(AIS)#operation/get/v1/getTransactionListUsingGET)
+```python
+#Get the bank transactions for the spesified account
+AISP.get_bank_transactions(bban = "Insert Account nr(bban) here")
+```
+
+- [Get card accounts](https://developer.dnb.no/documentation/psd2/prod/reference/Account-Information-Service-(AIS)#operation/get/v1/getCardAccountsInformationUsingGET)
+```python
+#Get information about the card accounts tied to a spesific user
+AISP.get_card()
+```
+
+- [Get card transactions](https://developer.dnb.no/documentation/psd2/prod/reference/Account-Information-Service-(AIS)#operation/get/v1/getCardAccountsTransactionsUsingGET)
+```python
+#Get a list over the transactions for the spesified card account 
+AISP.get_card_transactions(bban = "Insert Account nr(bban) here")
 ```
