@@ -24,6 +24,7 @@ The second requirement is to create, and download a certificate from [here](http
 1. Make sure that you have Python 3.7 or higher installed on your computer. 
 2. Make sure that you have pip installed. 
 3. Install the library by using the following command: `pip install git+https://github.com/Njord-Technologies/get_started_with_psd` 
+4. Test that the installation of the library was successful by running the command `python -m from DNB_psd2 import AISP `
 
 The following SSN's(Sosial Security Number) and ID for Corporate users are accesible in the Sandbox API:
 | SSN/TB-ident | No. of accounts | No. of credit card accounts | Available context |
