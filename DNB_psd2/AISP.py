@@ -2,7 +2,6 @@
 import json
 from datetime import datetime
 from socket import gethostbyname, gethostname
-from time import sleep
 from uuid import uuid4
 
 import requests
