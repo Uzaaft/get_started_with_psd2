@@ -21,6 +21,7 @@ class AISP:
             key_path (str): [Path to the *.cert file downloaded from developer.dnb.no]
             PSU_ID (str): [Sosial security number or TB-ID to access the data for an entity(human or corporation)]
         """
+        __slots__ = "endpoint", "date", "s", "post_consents"
         self.endpoint = "https://sandboxapi.psd.dnb.no/v1"
         self.date = datetime.date(datetime.now())
         hostname = gethostname()
@@ -39,8 +40,7 @@ class AISP:
         self.s = requests.Session()
         self.s.cert = (pem_path, key_path)
         self.s.headers.update(headers)
-        self.driver_path = webdriver_path
-        self.post_consents()
+        self.post_consents(webdriver=webdriver_path)
 
     def authenticate(self, url: str, webdriver_path) -> None:
         """Authenticate to the server .
@@ -62,7 +62,7 @@ class AISP:
             print("An error happened. Exiting...")
             driver.quit()
 
-    def post_consents(self) -> None:
+    def post_consents(self, webdriver_path) -> None:
         """Creates the consent ID for the user.
         """
         self.consent_payload = {
@@ -89,7 +89,7 @@ class AISP:
         self.authentication_url = r.json().get(
             "_links").get("scaRedirect").get("href")
         self.authenticate(self.authentication_url,
-                          webdriver_path=self.driver_path)
+                          webdriver_path=webdriver_path)
 
     def delete_consents(self) -> None:
         """Delete the consent for this user.
