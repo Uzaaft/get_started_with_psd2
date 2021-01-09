@@ -40,7 +40,7 @@ class AISP:
         self.s = requests.Session()
         self.s.cert = (pem_path, key_path)
         self.s.headers.update(headers)
-        self.post_consents(webdriver=webdriver_path)
+        self.post_consents(webdriver_path=webdriver_path)
 
     def authenticate(self, url: str, webdriver_path) -> None:
         """Authenticate to the server .
