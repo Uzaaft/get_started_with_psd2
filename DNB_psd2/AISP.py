@@ -11,7 +11,7 @@ from selenium.webdriver.chrome.options import Options
 
 
 class AISP:
-    __slots__ = "endpoint", "s"
+    __slots__ = "endpoint", "s", "consent_payload"
 
     def __init__(self, pem_path: str, key_path: str, PSU_ID: str, webdriver_path: str):
         """Initialize an instance with a connection to the DNB Sandbox API .
@@ -54,7 +54,6 @@ class AISP:
         driver = webdriver.Chrome(
             webdriver_path, options=chrome_options)
         driver.get(url)
-
         try:
             button = driver.find_elements_by_xpath(r'//*[@id="submit"]')[0]
             button.click()
@@ -109,7 +108,7 @@ class AISP:
             "GET",
             url=f"{self.endpoint}/consents/{self.consent}",
             data=self.consent_payload)
-        return r.text()
+        return r.text
 
     def accounts(self) -> list:
         """Get a list of bban accounts .
