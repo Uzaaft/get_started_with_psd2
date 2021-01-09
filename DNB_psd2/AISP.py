@@ -21,9 +21,8 @@ class AISP:
             key_path (str): [Path to the *.cert file downloaded from developer.dnb.no]
             PSU_ID (str): [Sosial security number or TB-ID to access the data for an entity(human or corporation)]
         """
-        __slots__ = "endpoint", "date", "s", "post_consents"
+        __slots__ = "endpoint", "s", "post_consents"
         self.endpoint = "https://sandboxapi.psd.dnb.no/v1"
-        self.date = datetime.date(datetime.now())
         hostname = gethostname()
         local_ip = gethostbyname(hostname)
         headers = {
@@ -65,9 +64,10 @@ class AISP:
     def post_consents(self, webdriver_path) -> None:
         """Creates the consent ID for the user.
         """
+
         self.consent_payload = {
             # "validUntil": "{{validUntil}}",
-            "validUntil": f"{self.date}",
+            "validUntil": f"{datetime.date(datetime.now())}",
             "frequencyPerDay": 1,
             "access": {
                 "balances": [],
