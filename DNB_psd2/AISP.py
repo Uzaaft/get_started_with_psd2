@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json
 from datetime import datetime
+from time import time
 from socket import gethostbyname, gethostname
 from uuid import uuid4
 
@@ -48,12 +49,13 @@ class AISP:
         """
         chrome_options = Options()
         chrome_options.headless = True
+        time0 = time()
         chrome_options.add_argument("--width=0")
         chrome_options.add_argument("--height=0")
-        # chrome_options.add_argument("--disable-gpu")
+        chrome_options.add_argument("--disable-gpu")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
-
+        print(time()-time0)
         prefs = {"profile.managed_default_content_settings.images": 2}
         chrome_options.add_experimental_option("prefs", prefs)
         driver = webdriver.Chrome(
