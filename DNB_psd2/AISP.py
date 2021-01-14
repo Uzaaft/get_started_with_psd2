@@ -50,7 +50,7 @@ class AISP:
         chrome_options.headless = True
         chrome_options.add_argument("--width=0")
         chrome_options.add_argument("--height=0")
-        chrome_options.add_argument("--disable-gpu")
+        # chrome_options.add_argument("--disable-gpu")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
 
