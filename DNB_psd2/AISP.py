@@ -48,6 +48,8 @@ class AISP:
         """
         chrome_options = Options()
         chrome_options.headless = True
+        chrome_options.add_argument("--width=100")
+        chrome_options.add_argument("--height=100")
         chrome_options.add_argument("--disable-gpu")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
@@ -160,10 +162,13 @@ class AISP:
         # Return a list with the different account numbers
         return [i.get('resourceId') for i in r.json().get('cardAccounts')]
 
-    def get_card_transactions(self, bban: int) -> None:
-        """Returns the current user's card transactions .
+    def get_card_transactions(self, card_account: int):
+        """Get the transactions of a card account .
+
         Args:
-            account (int): [description]
+            card_account (int): [description]
+        Returns:
+            [dict]: [returns a json dictionary with response body]
         """
         r = self.s.request(
             "GET",
@@ -172,9 +177,13 @@ class AISP:
         return r.text
 
     def get_account_balance(self, bban):
-        """Returns a json/dictionary of the account balance
+        """Get the balance of an account .
+
         Args:
-            bban (str): Account-number (bban)
+            bban ([str]): [Account nr.]
+
+        Returns:
+            [dict]: [Returns the balance of the spesified account.]
         """
         r = self.s.request(
             "GET",
