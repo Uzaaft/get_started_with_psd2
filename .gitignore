@@ -3,6 +3,7 @@
 webdriver/
 *.DS_Store
 *.vscode
+test.py
 
 #ignore certificates 
 certificate/certificate.pem

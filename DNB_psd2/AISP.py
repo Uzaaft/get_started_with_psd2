@@ -21,7 +21,7 @@ class AISP:
             key_path (str): [Path to the *.cert file downloaded from developer.dnb.no]
             PSU_ID (str): [Sosial security number or TB-ID to access the data for an entity(human or corporation)]
         """
-
+        t0 = time()
         self.endpoint = "https://sandboxapi.psd.dnb.no/v1"
         hostname = gethostname()
         local_ip = gethostbyname(hostname)
@@ -39,6 +39,7 @@ class AISP:
         self.s = requests.Session()
         self.s.cert = (pem_path, key_path)
         self.s.headers.update(headers)
+        print(time()-t0)
         self.post_consents(webdriver_path=webdriver_path)
 
     @staticmethod
@@ -49,13 +50,13 @@ class AISP:
         """
         chrome_options = Options()
         chrome_options.headless = True
-        time0 = time()
         chrome_options.add_argument("--width=0")
         chrome_options.add_argument("--height=0")
         chrome_options.add_argument("--disable-gpu")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
-        print(time()-time0)
+        chrome_options.add_argument("--disable-extensions")
+        chrome_options.add_argument("--disable-application-cache")
         prefs = {"profile.managed_default_content_settings.images": 2}
         chrome_options.add_experimental_option("prefs", prefs)
         driver = webdriver.Chrome(
