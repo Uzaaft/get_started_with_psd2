@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import json
 from datetime import datetime
-from time import time
 from socket import gethostbyname, gethostname
 from uuid import uuid4
 
@@ -21,25 +20,23 @@ class AISP:
             key_path (str): [Path to the *.cert file downloaded from developer.dnb.no]
             PSU_ID (str): [Sosial security number or TB-ID to access the data for an entity(human or corporation)]
         """
-        t0 = time()
         self.endpoint = "https://sandboxapi.psd.dnb.no/v1"
         hostname = gethostname()
         local_ip = gethostbyname(hostname)
         headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'X-Request-ID': str(uuid4()).lower(),
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "X-Request-ID": str(uuid4()).lower(),
             # Change the  PSU-ID to change the person and the cards available.
             # List over the PSU-ID can be found:
             # https://developer.dnb.no/documentation/psd2/prod
-            'PSU-IP-Address': local_ip,
-            'PSU-ID': PSU_ID,
-            'TPP-Redirect-URI': 'https://dnb.no'
+            "PSU-IP-Address": local_ip,
+            "PSU-ID": PSU_ID,
+            "TPP-Redirect-URI": "https://dnb.no",
         }
         self.s = requests.Session()
         self.s.cert = (pem_path, key_path)
         self.s.headers.update(headers)
-        print(time()-t0)
         self.post_consents(webdriver_path=webdriver_path)
 
     @staticmethod
@@ -59,8 +56,7 @@ class AISP:
         chrome_options.add_argument("--disable-application-cache")
         prefs = {"profile.managed_default_content_settings.images": 2}
         chrome_options.add_experimental_option("prefs", prefs)
-        driver = webdriver.Chrome(
-            webdriver_path, options=chrome_options)
+        driver = webdriver.Chrome(webdriver_path, options=chrome_options)
         driver.get(url)
         try:
             button = driver.find_elements_by_xpath(r'//*[@id="submit"]')[0]
@@ -71,51 +67,45 @@ class AISP:
             driver.quit()
 
     def post_consents(self, webdriver_path) -> None:
-        """Creates the consent ID for the user.
-        """
+        """Creates the consent ID for the user."""
 
         self.consent_payload = {
             # "validUntil": "{{validUntil}}",
             "validUntil": f"{datetime.date(datetime.now())}",
             "frequencyPerDay": 1,
-            "access": {
-                "balances": [],
-                "accounts": [],
-                "transactions": []
-            },
+            "access": {"balances": [], "accounts": [], "transactions": []},
             "recurringIndicator": "true",
-            "combinedServiceIndicator": "false"}
+            "combinedServiceIndicator": "false",
+        }
 
         r = self.s.request(
             "POST",
             url=f"{self.endpoint}/consents",
-            data=json.dumps(
-                self.consent_payload))
+            data=json.dumps(self.consent_payload),
+        )
 
         self.consent = r.json().get("consentId")
-        self.s.headers.update({'Consent-ID': self.consent})
+        self.s.headers.update({"Consent-ID": self.consent})
 
-        authentication_url = r.json().get(
-            "_links").get("scaRedirect").get("href")
-        self.authenticate(url=authentication_url,
-                          webdriver_path=webdriver_path)
+        authentication_url = r.json().get("_links").get("scaRedirect").get("href")
+        self.authenticate(url=authentication_url, webdriver_path=webdriver_path)
 
     def delete_consents(self) -> None:
-        """Delete the consent for this user.
-        """
+        """Delete the consent for this user."""
         r = self.s.request(
             "DELETE",
             url=f"{self.endpoint}/consents/{self.consent}",
-            data=self.consent_payload)
+            data=self.consent_payload,
+        )
         return r.text
 
     def get_consent(self):
-        """Get the current consent .
-        """
+        """Get the current consent ."""
         r = self.s.request(
             "GET",
             url=f"{self.endpoint}/consents/{self.consent}",
-            data=self.consent_payload)
+            data=self.consent_payload,
+        )
         return r.text
 
     def accounts(self) -> list:
@@ -124,23 +114,19 @@ class AISP:
             list: [List containing all the different bank account numbers]
         """
         payload = {}
-        r = self.s.request(
-            "GET", url=f"{self.endpoint}/accounts", data=payload)
+        r = self.s.request("GET", url=f"{self.endpoint}/accounts", data=payload)
         # Return a list with the different account numbers
-        return [i.get('bban') for i in r.json().get('accounts')]
+        return [i.get("bban") for i in r.json().get("accounts")]
 
     def get_account_info(self, bban: int) -> dict:
         """Get account information.
         Args:
             bban (int): [bban/bban nr]
         """
-        r = self.s.request(
-            "GET", url=f"{self.endpoint}/accounts/{bban}", data={})
+        r = self.s.request("GET", url=f"{self.endpoint}/accounts/{bban}", data={})
         return r.json()
 
-    def get_bank_transactions(
-            self,
-            bban: int) -> dict:
+    def get_bank_transactions(self, bban: int) -> dict:
         """Returns a list of of bban, pending and booked transactions .
         Args:
             bban (int): [The account we want to extract transactions from]
@@ -151,7 +137,8 @@ class AISP:
         r = self.s.request(
             "GET",
             url=f"{self.endpoint}/accounts/{bban}/transactions?bookingStatus=both&dateFrom=2000-01-01",
-            data={})
+            data={},
+        )
         return r.json()
 
     def get_card(self) -> list:
@@ -160,10 +147,9 @@ class AISP:
             list: [List containing all the different bank account numbers]
         """
         payload = {}
-        r = self.s.request(
-            "GET", url=f"{self.endpoint}/card-accounts", data=payload)
+        r = self.s.request("GET", url=f"{self.endpoint}/card-accounts", data=payload)
         # Return a list with the different account numbers
-        return [i.get('resourceId') for i in r.json().get('cardAccounts')]
+        return [i.get("resourceId") for i in r.json().get("cardAccounts")]
 
     def get_card_transactions(self, card_account: int):
         """Get the transactions of a card account .
@@ -175,8 +161,9 @@ class AISP:
         """
         r = self.s.request(
             "GET",
-            url=f"{self.endpoint}/card-accounts/{bban}/transactions?bookingStatus=both&dateFrom=2019-01-01",
-            data={})
+            url=f"{self.endpoint}/card-accounts/{card_account}/transactions?bookingStatus=both&dateFrom=2019-01-01",
+            data={},
+        )
         return r.text
 
     def get_account_balance(self, bban):
@@ -189,7 +176,6 @@ class AISP:
             [dict]: [Returns the balance of the spesified account.]
         """
         r = self.s.request(
-            "GET",
-            url=f"{self.endpoint}/accounts/{bban}/balances",
-            data={})
+            "GET", url=f"{self.endpoint}/accounts/{bban}/balances", data={}
+        )
         return r.json()
