@@ -17,9 +17,7 @@ The code in this repository only contain code that works with the AISP section o
 ## Requirements:
 
 First, you should sign up at the [DNB Developer portal](https://developer.dnb.no), and read the Documentation there. 
-There are two requirements to get this code up and running. One is is to authenticate yourself when asking for consent from the DNB API. In the Sandbox API it is required to go to the link provided when asking for consent. This is handled by the code provided in this repository by using [Selenium](https://www.selenium.dev) and the [Chromium Driver](https://chromedriver.chromium.org/downloads). 
-The [Selenium Documentation](https://www.selenium.dev/documentation/en/) is a great place to start if you have further enquiries about web automation.
-The second requirement is to create, and download a certificate from [here](https://developer.dnb.no/profile/psd2). 
+There is only one requirement to get this code up and running. And it is to create, and download a certificate from [here](https://developer.dnb.no/profile/psd2). 
 ## Installation:
 1. Make sure that you have Python 3.7 or higher installed on your computer. 
 2. Make sure that you have pip installed. 
@@ -40,8 +38,7 @@ The AISP endpoints can be reached using ```AISP```
 ```python
 from DNB_psd2 import AISP
 AISP_client = AISP(PSU_ID = "Insert SSN or TB here", pem_path = "Path to the *.pem file",
-                    key_path =  "Path to the *.key file", 
-                    webdriver_path="Path to the chrome webdriver")
+                    key_path =  "Path to the *.key file")
 ```
 The `AISP()` class collects the consent for the user. 
 
