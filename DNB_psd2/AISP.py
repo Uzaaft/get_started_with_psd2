@@ -71,7 +71,6 @@ class AISP:
 
     def post_consents(self) -> None:
         """Creates the consent ID for the user."""
-
         self.consent_payload = {
             # "validUntil": "{{validUntil}}",
             "validUntil": f"{datetime.date(datetime.now())}",

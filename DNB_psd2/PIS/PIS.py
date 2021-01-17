@@ -60,12 +60,9 @@ class PIS:
 
     @staticmethod
     def authenticate(url):
-        # payload = f"auth_status=Ok&url=%3A%2F%2{url}"
-        ic(url)
         payload = urllib.parse.quote(url)
         payload = payload.replace("/", "%2F")
         payload = f"auth_status=Ok&url={payload}"
-        ic(payload)
         parsed_url = urlparse(url)
         headers = {
             "Accept": "*/*",
@@ -81,7 +78,6 @@ class PIS:
             "X-Requested-With": "XMLHttpRequest",
         }
         ic(headers)
-        # print(parsed_url)
         response = requests.request(
             "POST",
             f"{parsed_url.scheme}://{parsed_url.netloc}/Prod/bankid/auth",
