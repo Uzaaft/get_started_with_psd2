@@ -90,6 +90,9 @@ class PIS:
         )
         print(response)
 
+    def get_domestic_credit_transfers(self):
+        return None
+
 
 if __name__ == "__main__":
     pem_path = "./certificate/certificate.pem"
