@@ -6,7 +6,6 @@ from urllib.parse import urlparse
 from uuid import uuid4
 
 import requests
-from icecream import ic
 
 from DNB_psd2 import AISP
 
@@ -77,14 +76,12 @@ class PIS:
             "Connection": "keep-alive",
             "X-Requested-With": "XMLHttpRequest",
         }
-        ic(headers)
-        response = requests.request(
+        requests.request(
             "POST",
             f"{parsed_url.scheme}://{parsed_url.netloc}/Prod/bankid/auth",
             headers=headers,
             data=payload,
         )
-        print(response)
 
     def get_domestic_credit_transfers(self):
         return None

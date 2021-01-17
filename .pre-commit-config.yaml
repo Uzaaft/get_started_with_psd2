@@ -1,4 +1,13 @@
 repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+    -   id: trailing-whitespace
+    -   id: mixed-line-ending
+    -   id: check-case-conflict
+    -   id: check-json
+    -   id: check-yaml
+    -   id: end-of-file-fixer
 -   repo: https://github.com/pre-commit/mirrors-isort
     rev: v5.7.0
     hooks:
