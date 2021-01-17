@@ -197,5 +197,3 @@ if __name__ == "__main__":
         key_path=key_path,
         PSU_ID="TB76688",
     )
-    print(time() - t0)
-    print(instance.accounts())
